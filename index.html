@@ -276,7 +276,7 @@
             font-weight: 600;
             border: 1px solid #4a4f5a;
             color: #f0b90b;
-            margin-top: 20px;
+            margin-top: 0;  /* 调整行内边距 */
         }
         .footnote {
             font-size: 12px;
@@ -290,6 +290,80 @@
             color: #848e9c;
             text-decoration: none;
             border-bottom: 1px dotted #f0b90b;
+        }
+
+        /* 什么是币安按钮样式 (复用，略微调整内边距以适应行内) */
+        .what-btn {
+            background: transparent;
+            border: 1px solid #3c414b;
+            color: #848e9c;
+            font-size: 13px;
+            cursor: pointer;
+            padding: 6px 14px;
+            border-radius: 40px;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+        .what-btn i {
+            color: #f0b90b;
+            font-size: 13px;
+        }
+        .what-btn:hover {
+            background: #2b2f36;
+            color: #eaecef;
+            border-color: #f0b90b;
+        }
+
+        /* 介绍卡片样式 (与之前一致) */
+        .what-content {
+            margin-top: 20px;
+            text-align: left;
+            background: #0b0e11;
+            border: 1px solid #3c414b;
+            border-radius: 24px;
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+        }
+        .what-card h3 {
+            color: #f0b90b;
+            font-size: 18px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .what-card h3 i {
+            font-size: 22px;
+        }
+        .what-card p {
+            color: #b7bdc6;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        .what-card ul {
+            list-style: none;
+            margin: 12px 0;
+        }
+        .what-card li {
+            color: #eaecef;
+            font-size: 14px;
+            padding: 6px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid #2b2f36;
+        }
+        .what-card li:last-child {
+            border-bottom: none;
+        }
+        .what-card li i {
+            color: #f0b90b;
+            width: 20px;
+            font-size: 14px;
         }
 
         /* 响应式优化 */
@@ -321,7 +395,6 @@
         <div class="binance-header">
             <div class="logo-area">
                 <div class="logo-icon"><span>B</span></div>
-                <!-- 将原“Binance”修改为中文“币安” -->
                 <span class="logo-text">币安</span>
             </div>
             <div class="badge"><i class="fas fa-star" style="color:#f0b90b; font-size:10px;"></i> 特邀专享</div>
@@ -337,7 +410,7 @@
             </div>
         </div>
 
-        <!-- 福利网格 (核心: 高返佣, 现金红包等) -->
+        <!-- 福利网格 -->
         <div class="benefits-grid">
             <div class="benefit-item">
                 <i class="fas fa-percent"></i>
@@ -356,12 +429,12 @@
             </div>
         </div>
 
-        <!-- 开始注册按钮 (替换为专属邀请链接) -->
+        <!-- 开始注册按钮 (专属邀请链接) -->
         <a href="https://www.bsmkweb.cc/register?ref=YUY8888" target="_blank" rel="noopener noreferrer" class="register-btn">
             开始注册 <i class="fas fa-arrow-right"></i>
         </a>
 
-        <!-- 重要提示：若打开失败，复制到浏览器粘贴 -->
+        <!-- 重要提示 -->
         <div class="warning-tip">
             <i class="fas fa-exclamation-triangle"></i>
             <span>
@@ -369,33 +442,50 @@
             </span>
         </div>
 
-        <!-- 可复制的专属链接框 (与按钮相同链接) -->
+        <!-- 可复制链接框 -->
         <div class="link-box">
             <input type="text" id="inviteLink" value="https://www.bsmkweb.cc/register?ref=YUY8888" readonly>
             <button class="copy-btn" id="copyBtn"><i class="far fa-copy"></i> 复制链接</button>
         </div>
 
-        <!-- 额外高亮邀请码 -->
+        <!-- 邀请码 + 什么是币安按钮 (原永久绑定返佣已移除) -->
         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 16px; flex-wrap: wrap; gap: 10px;">
             <span class="ref-highlight"><i class="fas fa-tag"></i> 邀请码：YUY8888</span>
-            <span style="color:#b7bdc6; font-size:13px;"><i class="fas fa-shield-alt" style="color:#f0b90b;"></i> 永久绑定返佣</span>
+            <!-- 新按钮：什么是币安？ID保持不变，样式微调 -->
+            <button class="what-btn" id="whatBtn"><i class="fas fa-question-circle"></i> 什么是币安？</button>
         </div>
 
-        <!-- 底部说明 (保持透明) -->
+        <!-- 介绍卡片 (初始隐藏) 放置在按钮下方 -->
+        <div class="what-content" id="whatContent" style="display: none;">
+            <div class="what-card">
+                <h3><i class="fas fa-shield-alt" style="color:#f0b90b;"></i> 关于币安 (Binance)</h3>
+                <p>币安是全球领先的区块链生态系统，成立于2017年，拥有超过1.5亿用户。币安全球交易所提供安全、可靠的数字资产交易服务，涵盖现货、合约、理财等多种产品。</p>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> 全球最大交易量交易所之一，深度与流动性领先</li>
+                    <li><i class="fas fa-check-circle"></i> 持有多个地区合规牌照（MSB、VASP等），受监管运营</li>
+                    <li><i class="fas fa-check-circle"></i> 行业顶尖安全风控 + 用户安全资产基金（SAFU）保障资金</li>
+                    <li><i class="fas fa-check-circle"></i> 7x24小时多语言客服，极速响应</li>
+                    <li><i class="fas fa-check-circle"></i> 定期发布储备证明，100%透明与合规</li>
+                </ul>
+                <p>币安致力于构建开放、透明的数字经济，让全球用户自由参与。选择币安，就是选择信任与安全。</p>
+            </div>
+        </div>
+
+        <!-- 底部说明 -->
         <div class="footnote">
             ⚡ 福利仅限通过本链接注册的新用户 · 现金红包活动最终解释权归邀请方所有<br>
             <a href="#" style="cursor: default;">安全提醒：请务必通过上方链接注册，勿信他人</a>
         </div>
     </div>
 
-    <!-- 复制交互 (轻提示采用 alert，符合要求且兼容) -->
+    <!-- 复制交互 与 什么是币安 展开/折叠 -->
     <script>
         (function() {
+            // 复制链接功能
             const copyBtn = document.getElementById('copyBtn');
             const linkInput = document.getElementById('inviteLink');
 
             function copyToClipboard(text) {
-                // 优先使用现代clipboard API
                 if (navigator.clipboard && navigator.clipboard.writeText) {
                     navigator.clipboard.writeText(text).then(() => {
                         alert('✅ 复制成功！请粘贴到手机自带浏览器地址栏打开。');
@@ -408,35 +498,37 @@
             }
 
             function fallbackCopy(text) {
-                // 备选方案 (针对旧浏览器)
                 linkInput.select();
-                linkInput.setSelectionRange(0, 99999); // 对于移动端
+                linkInput.setSelectionRange(0, 99999);
                 try {
                     document.execCommand('copy');
                     alert('✅ 复制成功！请粘贴到自带浏览器打开。');
                 } catch (err) {
                     alert('❌ 复制失败，请手动长按链接选择复制');
                 }
-                // 取消选中 (可选)
                 linkInput.blur();
             }
 
             copyBtn.addEventListener('click', function(e) {
                 e.preventDefault();
-                const link = linkInput.value;
-                copyToClipboard(link);
+                copyToClipboard(linkInput.value);
             });
 
-            // 增加用户体验：点击输入框自动全选（方便手动复制）
             linkInput.addEventListener('click', function() {
                 this.select();
             });
 
-            // 可选：阻止按钮默认提交任何形式
-            copyBtn.addEventListener('mousedown', (e) => e.preventDefault());
+            // 什么是币安按钮切换显示
+            const whatBtn = document.getElementById('whatBtn');
+            const whatContent = document.getElementById('whatContent');
+            whatBtn.addEventListener('click', function() {
+                if (whatContent.style.display === 'none') {
+                    whatContent.style.display = 'block';
+                } else {
+                    whatContent.style.display = 'none';
+                }
+            });
         })();
     </script>
-
-    <!-- 注：左上角已改为中文“币安”，其他内容不变 -->
 </body>
 </html>
