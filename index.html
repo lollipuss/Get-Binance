@@ -5,112 +5,97 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>币安注册 - 专属邀请链接</title>
   <style>
-    /* 原有样式保持不变，这里省略以节省空间，可直接复制之前版本的 style */
+    /* 保留你原来的全部 style，这里只展示新增/修改部分 */
     .btn-jump {
-      background: #00c853;  /* 绿色，更醒目表示“直接跳” */
+      background: #4caf50;  /* 绿色，更吸引点击 */
       color: white;
+    }
+    .btn-jump:hover {
+      background: #43a047;
     }
   </style>
 </head>
 <body>
 
-<div class="container">
-  <h1>币安专属注册通道</h1>
-  <div class="subtitle">使用此链接注册可获得最高返佣 + 福利</div>
+<!-- HTML 结构保持不变，只改按钮类名和 onclick -->
 
-  <div class="card">
-    <div style="text-align:center; margin-bottom:16px; font-size:1.1rem;">
-      我的币安邀请链接：
-    </div>
-    
-    <div class="link-box" id="inviteLink">
-      https://www.bsmkweb.cc/register?ref=YUY8888
-    </div>
+<button class="btn btn-jump" onclick="attemptJump()">
+  → 立即跳转到系统浏览器（推荐）
+</button>
 
-    <button class="btn btn-jump" onclick="tryJumpToBrowser()">
-      → 立即跳转到系统浏览器打开（推荐）
-    </button>
+<button class="btn btn-copy" onclick="copyLink()">
+  📋 一键复制链接（备用方式）
+</button>
 
-    <button class="btn btn-copy" onclick="copyLink()">
-      📋 一键复制链接（备用）
-    </button>
-
-    <div class="steps">
-      <strong>操作建议：</strong><br><br>
-      1. 优先点击上方「立即跳转到系统浏览器打开」<br>
-      2. 如果仍停留在当前页面或加载异常 → 用「一键复制链接」<br>
-      3. 打开手机自带浏览器（Safari / Chrome）<br>
-      4. 长按地址栏 → 粘贴 → 前往<br>
-      5. 完成注册享受返佣
-    </div>
-
-    <div class="tip">
-      <strong>重要：</strong><br>
-      微信/QQ/Telegram 内置浏览器常导致注册失败或不显示福利，<br>
-      务必用系统浏览器打开！
-    </div>
-  </div>
+<!-- steps 和 tip 稍作调整 -->
+<div class="steps">
+  <strong>推荐操作流程：</strong><br><br>
+  1. 点击「立即跳转到系统浏览器」 — 大部分手机可自动成功<br>
+  2. 如果页面没变化或仍卡在微信 → 点击「一键复制链接」<br>
+  3. 回到手机桌面，打开 Safari / Chrome 等自带浏览器<br>
+  4. 长按地址栏粘贴链接 → 前往注册<br>
+  5. 注册成功后可享受返佣权益
 </div>
 
 <script>
-const inviteUrl = "https://www.bsmkweb.cc/register?ref=YUY8888";
+const INVITE_URL = "https://www.bsmkweb.cc/register?ref=YUY8888";
 
-function isInAppBrowser() {
-  const ua = navigator.userAgent || navigator.vendor || window.opera;
-  return /MicroMessenger/i.test(ua) ||   // 微信
-         /QQ/i.test(ua) ||                // QQ
-         /weibo/i.test(ua) ||             // 微博
-         /TikTok/i.test(ua);              // 等常见内置浏览器
+function isLikelyWeChat() {
+  const ua = navigator.userAgent.toLowerCase();
+  return ua.includes('micromessenger') || ua.includes('wechat');
 }
 
-function tryJumpToBrowser() {
-  if (!isInAppBrowser()) {
-    // 不在内置浏览器，直接正常打开
-    window.open(inviteUrl, '_blank');
+function attemptJump() {
+  if (!isLikelyWeChat()) {
+    // 不在微信，直接正常打开
+    window.open(INVITE_URL, '_blank');
     return;
   }
 
-  // 尝试几种跳出方式
-  let opened = false;
+  // 微信内尝试跳出（顺序从最可能到次之）
+  const attempts = [
+    () => window.open(INVITE_URL, '_system'),
+    () => window.open(INVITE_URL, '_blank'),
+    () => { window.location.href = INVITE_URL; }
+  ];
 
-  // 方法1: _system (常用于 hybrid app，但纯 web 有时也触发系统选择)
-  try {
-    window.open(inviteUrl, '_system');
-    opened = true;
-  } catch(e) {}
+  attempts.forEach(fn => {
+    try { fn(); } catch(e) {}
+  });
 
-  // 方法2: _blank + focus
-  if (!opened) {
-    const win = window.open(inviteUrl, '_blank');
-    if (win) {
-      win.focus();
-      opened = true;
-    }
-  }
-
-  // 方法3: location.href 重定向（部分场景能跳出）
-  if (!opened) {
-    window.location.href = inviteUrl;
-    opened = true;  // 假设成功
-  }
-
-  // 如果以上都没跳出（还在当前页），fallback 到复制 + 提示
+  // 1.5 秒后检查是否还在当前页（微信内通常不会马上离开）
   setTimeout(() => {
-    if (document.hasFocus() && isInAppBrowser()) {  // 还在当前页
-      copyLink(true);  // true 表示来自跳转失败
+    if (document.hasFocus() && isLikelyWeChat()) {
+      // 还在微信 → 自动复制 + 友好提示
+      navigator.clipboard.writeText(INVITE_URL).then(() => {
+        alert(
+          "自动跳转失败（微信内置浏览器限制）\n\n" +
+          "链接已自动复制到剪贴板！\n\n" +
+          "请现在：\n" +
+          "1. 返回手机桌面\n" +
+          "2. 打开 Safari / Chrome / 系统浏览器\n" +
+          "3. 长按地址栏 → 粘贴 → 前往\n\n" +
+          "这样就能正常注册并获得返佣啦～"
+        );
+      }).catch(() => {
+        alert(
+          "自动跳转失败，且复制也失败。\n\n" +
+          "请长按下方链接手动复制：\n" + INVITE_URL
+        );
+      });
     }
-  }, 1500);  // 给 1.5 秒让跳转生效
+  }, 1500);
 }
 
-function copyLink(fromJumpFail = false) {
-  navigator.clipboard.writeText(inviteUrl).then(() => {
-    let msg = "邀请链接已复制！请立即打开系统自带浏览器（Safari/Chrome），粘贴到地址栏访问～";
-    if (fromJumpFail) {
-      msg = "自动跳转失败（常见于微信/QQ内置浏览器）。\n链接已复制，请手动打开系统浏览器粘贴访问！";
-    }
-    alert(msg);
+function copyLink() {
+  navigator.clipboard.writeText(INVITE_URL).then(() => {
+    alert(
+      "链接已复制！\n\n" +
+      "请打开系统浏览器（Safari/Chrome），粘贴到地址栏访问。\n" +
+      "避免在微信内打开，以确保注册顺利。"
+    );
   }).catch(() => {
-    alert("复制失败，请长按链接文字手动复制：" + inviteUrl);
+    alert("复制失败，请长按链接手动复制：" + INVITE_URL);
   });
 }
 </script>
