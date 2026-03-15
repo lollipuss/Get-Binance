@@ -1,550 +1,157 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>币安注册 · 一键直达浏览器</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        }
-
-        body {
-            background: linear-gradient(145deg, #f5f7fa 0%, #e9ecf0 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(4px);
-            width: 100%;
-            max-width: 520px;
-            border-radius: 2rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 6px 12px rgba(0, 0, 0, 0.05);
-            padding: 2rem 1.8rem;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            transition: all 0.2s ease;
-        }
-
-        h1 {
-            font-size: 2rem;
-            font-weight: 600;
-            letter-spacing: -0.02em;
-            background: linear-gradient(120deg, #1a2639, #2c3e50);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.3rem;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        h1 span {
-            font-size: 2rem;
-            background: none;
-            -webkit-text-fill-color: initial;
-        }
-
-        .subhead {
-            font-size: 1rem;
-            color: #4b5565;
-            margin-bottom: 1.8rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 2px dashed #d0d9e5;
-            font-weight: 400;
-        }
-
-        .link-section {
-            background: #f1f4f9;
-            border-radius: 1.4rem;
-            padding: 1.4rem 1.2rem;
-            margin-bottom: 1.5rem;
-            border: 1px solid #ffffff;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02), 0 4px 8px rgba(0,0,0,0.02);
-        }
-
-        .link-label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #2c3e50;
-            margin-bottom: 0.5rem;
-        }
-
-        .link-row {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 0.6rem;
-        }
-
-        .link-input {
-            flex: 1 1 200px;
-            background: white;
-            border: 1px solid #cfdbe9;
-            border-radius: 2.5rem;
-            padding: 0.85rem 1.2rem;
-            font-size: 0.95rem;
-            color: #1e2b3c;
-            outline: none;
-            transition: border 0.15s, box-shadow 0.15s;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-            font-family: 'SF Mono', 'Fira Code', monospace;
-            letter-spacing: 0.2px;
-            word-break: break-all;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .link-input:focus {
-            border-color: #f0b90b;
-            box-shadow: 0 0 0 3px rgba(240, 185, 11, 0.2);
-        }
-
-        .copy-btn {
-            background: #f0b90b;
-            border: none;
-            border-radius: 2.5rem;
-            padding: 0.85rem 1.8rem;
-            font-weight: 600;
-            font-size: 1rem;
-            color: #1e1e2a;
-            cursor: pointer;
-            box-shadow: 0 6px 12px rgba(240, 185, 11, 0.3);
-            transition: all 0.2s ease;
-            min-width: 90px;
-            border: 1px solid rgba(255, 215, 100, 0.5);
-            letter-spacing: 0.3px;
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
-        }
-
-        .copy-btn:active {
-            transform: scale(0.96);
-            background: #e0a80b;
-            box-shadow: 0 2px 4px rgba(240, 185, 11, 0.4);
-        }
-
-        .copy-btn:disabled {
-            opacity: 0.7;
-            transform: none;
-            background: #b8a35c;
-            box-shadow: none;
-            cursor: not-allowed;
-        }
-
-        /* 一键跳转按钮区域 - 上移后更显眼 */
-        .one-click-section {
-            margin: 1.8rem 0 1.8rem;
-            text-align: center;
-        }
-
-        .browser-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.6rem;
-            background: #1f2a3f;
-            border: none;
-            width: 100%;
-            padding: 1.3rem 1rem; /* 略大一点，更突出 */
-            border-radius: 3rem;
-            font-weight: 700;       /* 加粗 */
-            font-size: 1.4rem;      /* 更大字号 */
-            color: #f0b90b;
-            background: linear-gradient(145deg, #1a2538, #2a384e);
-            box-shadow: 0 12px 22px rgba(0, 0, 0, 0.25), 0 0 0 2px #f0b90b inset; /* 金色内边框增强视觉 */
-            cursor: pointer;
-            transition: all 0.15s ease;
-            letter-spacing: 0.5px;
-            border: 1px solid #7a93b5;
-            text-decoration: none;
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
-        }
-
-        .browser-btn:active {
-            transform: scale(0.96);
-            background: #141e2c;
-            box-shadow: 0 5px 10px rgba(0,0,0,0.3), 0 0 0 2px #f0b90b inset;
-        }
-
-        .browser-btn .icon {
-            font-size: 2rem;        /* 图标更大 */
-            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.4));
-        }
-
-        .browser-hint {
-            font-size: 0.85rem;
-            color: #f0b90b;
-            background: #1f2a3f;
-            display: inline-block;
-            padding: 0.3rem 1.2rem;
-            border-radius: 2rem;
-            margin-top: 0.6rem;
-            font-weight: 500;
-            border: 1px solid #546b8a;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        }
-
-        .steps {
-            background: #ffffffd9;
-            border-radius: 1.5rem;
-            padding: 1.4rem 1.4rem 1.4rem 1.8rem;
-            margin: 1.2rem 0 1.2rem;
-            border: 1px solid #eef2f6;
-        }
-
-        .steps h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #1f2a3f;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-
-        .steps ul {
-            list-style: none;
-        }
-
-        .steps li {
-            margin-bottom: 1rem;
-            font-size: 1rem;
-            display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
-            color: #2a3649;
-            line-height: 1.4;
-        }
-
-        .step-icon {
-            background: #eef3fc;
-            border-radius: 50%;
-            width: 1.8rem;
-            height: 1.8rem;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            color: #f0b90b;
-            background-color: #1f2a3f;
-            flex-shrink: 0;
-            font-size: 1rem;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-        }
-
-        .steps li strong {
-            color: #0b1a2f;
-            font-weight: 600;
-        }
-
-        .warning-note {
-            background: #fff8e0;
-            border-left: 5px solid #f0b90b;
-            padding: 1rem 1.2rem;
-            border-radius: 1.2rem;
-            font-size: 0.92rem;
-            color: #3d3f45;
-            margin: 1.8rem 0 0.8rem;
-            display: flex;
-            gap: 0.7rem;
-            align-items: center;
-            border: 1px solid #ffe9b0;
-        }
-
-        .warning-note .emoji {
-            font-size: 1.5rem;
-        }
-
-        .footer-note {
-            text-align: center;
-            font-size: 0.8rem;
-            color: #7a879b;
-            margin-top: 1.8rem;
-            border-top: 1px solid #dae2ed;
-            padding-top: 1.2rem;
-        }
-
-        .footer-note a {
-            color: #2c3e50;
-            text-decoration: none;
-            border-bottom: 1px dotted #8a9bb5;
-        }
-
-        .fingerprint {
-            display: inline-block;
-            background: #e9edf3;
-            border-radius: 20px;
-            padding: 0.2rem 1rem;
-            font-size: 0.75rem;
-            color: #3d5068;
-        }
-
-        /* 移动端微调 */
-        @media (max-width: 420px) {
-            .card {
-                padding: 1.5rem 1.2rem;
-            }
-            .link-row {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .copy-btn {
-                width: 100%;
-            }
-            .step-icon {
-                width: 1.6rem;
-                height: 1.6rem;
-                font-size: 0.9rem;
-            }
-            .browser-btn {
-                font-size: 1.2rem;
-                padding: 1.1rem;
-            }
-            .browser-btn .icon {
-                font-size: 1.7rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>币安注册 - 专属邀请链接</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .container {
+      max-width: 420px;
+      width: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    h1 {
+      font-size: 2.1rem;
+      margin: 40px 0 12px;
+      text-align: center;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+    .subtitle {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .card {
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 28px 24px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+    .link-box {
+      background: rgba(0,0,0,0.3);
+      border-radius: 12px;
+      padding: 16px;
+      font-size: 1.05rem;
+      word-break: break-all;
+      margin: 20px 0 24px;
+      border: 1px dashed #60a5fa;
+    }
+    .btn {
+      display: block;
+      width: 100%;
+      background: #f0b90b;
+      color: #0b1421;
+      font-size: 1.18rem;
+      font-weight: bold;
+      text-align: center;
+      padding: 16px 0;
+      border-radius: 12px;
+      text-decoration: none;
+      margin: 16px 0;
+      box-shadow: 0 6px 20px rgba(240,185,11,0.4);
+      transition: all 0.2s;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(240,185,11,0.55);
+    }
+    .btn-copy {
+      background: #3b82f6;
+      color: white;
+      box-shadow: 0 6px 20px rgba(59,130,246,0.4);
+    }
+    .steps {
+      margin-top: 32px;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+    .steps strong {
+      color: #fde047;
+    }
+    .tip {
+      margin-top: 36px;
+      font-size: 0.95rem;
+      opacity: 0.85;
+      text-align: center;
+      line-height: 1.6;
+      padding: 12px;
+      background: rgba(255,0,0,0.15);
+      border-radius: 10px;
+      border: 1px solid rgba(255,100,100,0.3);
+    }
+  </style>
 </head>
 <body>
-    <div class="card">
-        <h1>
-            <span>🪙</span> 币安注册
-        </h1>
-        <div class="subhead">
-            专属邀请 · 享费率折扣 & 奖励
-        </div>
 
-        <!-- 核心链接区域 -->
-        <div class="link-section">
-            <span class="link-label">🔗 你的专属邀请链接</span>
-            <div class="link-row">
-                <input type="text" class="link-input" id="inviteLink" 
-                       value="https://www.bsmkweb.cc/register?ref=YUY8888" 
-                       readonly aria-label="邀请链接">
-                <button class="copy-btn" id="copyBtn">复制链接</button>
-            </div>
-            <p style="font-size: 0.75rem; color: #66758b; margin-top: 0.6rem; padding-left: 0.2rem;">
-                ⚡ 点击复制，内含邀请码 YUY8888
-            </p>
-        </div>
+<div class="container">
+  <h1>币安专属注册通道</h1>
+  <div class="subtitle">使用此链接注册可获得最高返佣 + 福利</div>
 
-        <!-- 一键跳转区域 - 已移至显眼位置（链接区域下方，步骤上方） -->
-        <div class="one-click-section">
-            <button class="browser-btn" id="smartJumpBtn">
-                <span class="icon" id="jumpIcon">🌐</span>
-                <span id="jumpText">正在检测环境...</span>
-            </button>
-            <div class="browser-hint" id="jumpHint">
-                ⚡ 点击后根据当前环境自动处理，确保您能正确访问
-            </div>
-        </div>
-
-        <!-- 关键操作步骤 (核心) -->
-        <div class="steps">
-            <h3>📋 关键操作步骤</h3>
-            <ul>
-                <li>
-                    <span class="step-icon">1️⃣</span>
-                    <span><strong>复制上方链接</strong> — 点击“复制链接”按钮，或手动长按选择复制。</span>
-                </li>
-                <li>
-                    <span class="step-icon">2️⃣</span>
-                    <span><strong>打开系统自带浏览器</strong> — 例如 Safari、Chrome、三星浏览器、华为浏览器等。</span>
-                </li>
-                <li>
-                    <span class="step-icon">3️⃣</span>
-                    <span><strong>粘贴并访问</strong> — 在浏览器地址栏长按粘贴链接，然后打开。</span>
-                </li>
-                <li>
-                    <span class="step-icon">4️⃣</span>
-                    <span><strong>完成注册</strong> — 按币安页面提示填写信息，邀请关系自动记录。</span>
-                </li>
-            </ul>
-        </div>
-
-        <!-- 重要提醒 (强调必须用系统浏览器) -->
-        <div class="warning-note">
-            <span class="emoji">⚠️</span>
-            <span><strong>非常重要：</strong>请勿在微信/QQ/抖音等应用内直接打开链接。务必复制链接后，<strong>退出当前应用，打开手机自带的浏览器</strong>（Safari/Chrome等）粘贴访问，否则邀请可能无法跟踪，也无法享受优惠。</span>
-        </div>
-
-        <!-- 额外安全提示 & 链接备用显示 -->
-        <div style="background: #f7f9fc; border-radius: 1rem; padding: 0.8rem 1rem; margin-top: 1rem; border: 1px dashed #b9c6d8;">
-            <div style="display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;">
-                <span class="fingerprint">🔐 邀请链接已加密</span>
-                <span style="font-size:0.85rem; color:#3f5570;">👇 手动复制备用</span>
-            </div>
-            <p style="font-family: monospace; font-size: 0.85rem; word-break: break-all; background: #eef2f7; padding: 0.5rem; border-radius: 0.8rem; margin-top: 0.3rem; color:#1f2f41;">
-                https://www.bsmkweb.cc/register?ref=YUY8888
-            </p>
-        </div>
-
-        <div class="footer-note">
-            ✦ 币安全球 ✦ 邀请码 YUY8888 <br>
-            <span style="font-size: 0.7rem;">如有问题，请复制上方链接通过浏览器访问帮助中心</span>
-        </div>
+  <div class="card">
+    <div style="text-align:center; margin-bottom:16px; font-size:1.1rem;">
+      我的币安邀请链接：
+    </div>
+    
+    <div class="link-box" id="inviteLink">
+      https://www.bsmkweb.cc/register?ref=YUY8888
     </div>
 
-    <script>
-        (function() {
-            // 常量定义
-            const INVITE_URL = "https://www.bsmkweb.cc/register?ref=YUY8888";
-            const copyBtn = document.getElementById('copyBtn');
-            const linkInput = document.getElementById('inviteLink');
-            const smartJumpBtn = document.getElementById('smartJumpBtn');
-            const jumpText = document.getElementById('jumpText');
-            const jumpIcon = document.getElementById('jumpIcon');
-            const jumpHint = document.getElementById('jumpHint');
+    <button class="btn" onclick="goToBrowser()">
+      → 立即转到浏览器打开
+    </button>
 
-            let copyTimer = null;
+    <button class="btn btn-copy" onclick="copyLink()">
+      📋 一键复制链接
+    </button>
 
-            // ---------- 复制功能 (保持不变) ----------
-            function resetCopyButton() {
-                if (copyTimer) {
-                    clearTimeout(copyTimer);
-                    copyTimer = null;
-                }
-                copyBtn.disabled = false;
-                copyBtn.innerText = '复制链接';
-            }
+    <div class="steps">
+      <strong>强烈推荐的操作步骤：</strong><br><br>
+      1. 点击上方「一键复制链接」<br>
+      2. 回到手机桌面<br>
+      3. 打开系统自带浏览器（Safari / Chrome / 系统浏览器）<br>
+      4. 长按地址栏 → 粘贴刚才复制的链接 → 前往<br>
+      5. 完成注册即可享受返佣权益
+    </div>
 
-            function showCopySuccess() {
-                if (copyTimer) {
-                    clearTimeout(copyTimer);
-                }
-                copyBtn.disabled = true;
-                copyBtn.innerText = '已复制 ✓';
-                copyTimer = setTimeout(() => {
-                    copyBtn.disabled = false;
-                    copyBtn.innerText = '复制链接';
-                    copyTimer = null;
-                }, 2000);
-            }
+    <div class="tip">
+      <strong>重要提醒：</strong><br>
+      千万不要直接在微信/QQ/Telegram 内置浏览器中打开！<br>
+      这些内置浏览器经常出现加载失败、无法注册或跳转异常的情况。
+    </div>
+  </div>
+</div>
 
-            function fallbackCopy() {
-                linkInput.select();
-                linkInput.setSelectionRange(0, 99999);
-                let success = false;
-                try {
-                    success = document.execCommand('copy');
-                } catch (err) {
-                    console.warn('execCommand 复制失败', err);
-                }
-                linkInput.blur();
-                window.getSelection().removeAllRanges();
-                if (success) {
-                    showCopySuccess();
-                } else {
-                    alert('无法自动复制，请长按链接手动选择“复制”');
-                }
-            }
+<script>
+function copyLink() {
+  const link = "https://www.bsmkweb.cc/register?ref=YUY8888";
+  navigator.clipboard.writeText(link).then(() => {
+    alert("邀请链接已复制！\n请马上打开系统自带浏览器，粘贴并访问～");
+  }).catch(() => {
+    alert("复制失败，可长按链接文字手动复制");
+  });
+}
 
-            function handleCopy() {
-                if (copyBtn.disabled) return;
-                const link = linkInput.value;
-                if (navigator.clipboard && navigator.clipboard.writeText) {
-                    navigator.clipboard.writeText(link)
-                        .then(() => {
-                            showCopySuccess();
-                        })
-                        .catch((err) => {
-                            console.warn('Clipboard API 失败，尝试降级', err);
-                            fallbackCopy();
-                        });
-                } else {
-                    fallbackCopy();
-                }
-            }
+function goToBrowser() {
+  const link = "https://www.bsmkweb.cc/register?ref=YUY8888";
+  alert("请手动打开系统自带浏览器（Safari/Chrome），然后粘贴链接访问。\n\n（直接点击链接在某些聊天软件中可能被拦截或无法正常注册）");
+  // 不直接 window.open，避免在内置浏览器中打开
+}
+</script>
 
-            copyBtn.addEventListener('click', handleCopy);
-            linkInput.addEventListener('click', function() {
-                this.select();
-            });
-
-            // ---------- 智能一键跳转功能 ----------
-            // 检测是否为微信或QQ内置浏览器
-            function isWechatOrQQ() {
-                const ua = navigator.userAgent.toLowerCase();
-                // 微信: micromessenger; QQ: qq/ 或 mqqbrowser
-                return ua.indexOf('micromessenger') !== -1 || ua.indexOf('qq/') !== -1 || ua.indexOf('mqqbrowser') !== -1;
-            }
-
-            // 初始化按钮文案和行为
-            function initSmartJump() {
-                if (isWechatOrQQ()) {
-                    // 微信/QQ 内置浏览器：改为复制链接+提示
-                    jumpText.innerText = '复制链接并查看打开教程';
-                    jumpIcon.innerText = '📋';
-                    jumpHint.innerText = '⚠️ 检测到您在应用内，点击复制链接，然后按提示在浏览器中打开';
-                    smartJumpBtn.onclick = function(e) {
-                        e.preventDefault();
-                        // 复制链接
-                        if (navigator.clipboard && navigator.clipboard.writeText) {
-                            navigator.clipboard.writeText(INVITE_URL).catch(() => fallbackCopyForJump());
-                        } else {
-                            fallbackCopyForJump();
-                        }
-                        // 弹窗提示
-                        alert('✅ 链接已复制！\n\n请点击微信/QQ右上角“···”菜单，选择“在浏览器中打开”，然后在浏览器地址栏长按粘贴链接访问。');
-                    };
-                } else {
-                    // 普通浏览器：直接跳转
-                    jumpText.innerText = '一键在系统浏览器中打开';
-                    jumpIcon.innerText = '🌐';
-                    jumpHint.innerText = '⚡ 点击后直接跳转至邀请链接，开始注册';
-                    smartJumpBtn.onclick = function(e) {
-                        e.preventDefault();
-                        // 直接跳转
-                        window.location.href = INVITE_URL;
-                    };
-                }
-            }
-
-            // 为跳转按钮准备的降级复制 (不使用 linkInput，直接复制常量)
-            function fallbackCopyForJump() {
-                // 创建一个临时input
-                const tempInput = document.createElement('input');
-                tempInput.value = INVITE_URL;
-                document.body.appendChild(tempInput);
-                tempInput.select();
-                tempInput.setSelectionRange(0, 99999);
-                let success = false;
-                try {
-                    success = document.execCommand('copy');
-                } catch (err) {
-                    console.warn('execCommand 复制失败', err);
-                }
-                document.body.removeChild(tempInput);
-                if (!success) {
-                    alert('无法自动复制，请手动长按链接复制');
-                }
-            }
-
-            // 执行初始化
-            initSmartJump();
-
-            // 清理复制定时器
-            window.addEventListener('beforeunload', function() {
-                if (copyTimer) {
-                    clearTimeout(copyTimer);
-                    copyTimer = null;
-                }
-            });
-
-        })();
-    </script>
 </body>
 </html>
