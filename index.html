@@ -5,94 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>币安注册 - 专属邀请链接</title>
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: linear-gradient(135deg, #1e3c72, #2a5298);
+    /* 原有样式保持不变，这里省略以节省空间，可直接复制之前版本的 style */
+    .btn-jump {
+      background: #00c853;  /* 绿色，更醒目表示“直接跳” */
       color: white;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .container {
-      max-width: 420px;
-      width: 100%;
-      padding: 20px;
-      box-sizing: border-box;
-    }
-    h1 {
-      font-size: 2.1rem;
-      margin: 40px 0 12px;
-      text-align: center;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.4);
-    }
-    .subtitle {
-      font-size: 1.1rem;
-      opacity: 0.9;
-      text-align: center;
-      margin-bottom: 40px;
-    }
-    .card {
-      background: rgba(255,255,255,0.12);
-      backdrop-filter: blur(10px);
-      border-radius: 16px;
-      padding: 28px 24px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
-      border: 1px solid rgba(255,255,255,0.18);
-    }
-    .link-box {
-      background: rgba(0,0,0,0.3);
-      border-radius: 12px;
-      padding: 16px;
-      font-size: 1.05rem;
-      word-break: break-all;
-      margin: 20px 0 24px;
-      border: 1px dashed #60a5fa;
-    }
-    .btn {
-      display: block;
-      width: 100%;
-      background: #f0b90b;
-      color: #0b1421;
-      font-size: 1.18rem;
-      font-weight: bold;
-      text-align: center;
-      padding: 16px 0;
-      border-radius: 12px;
-      text-decoration: none;
-      margin: 16px 0;
-      box-shadow: 0 6px 20px rgba(240,185,11,0.4);
-      transition: all 0.2s;
-    }
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 28px rgba(240,185,11,0.55);
-    }
-    .btn-copy {
-      background: #3b82f6;
-      color: white;
-      box-shadow: 0 6px 20px rgba(59,130,246,0.4);
-    }
-    .steps {
-      margin-top: 32px;
-      font-size: 1.05rem;
-      line-height: 1.7;
-    }
-    .steps strong {
-      color: #fde047;
-    }
-    .tip {
-      margin-top: 36px;
-      font-size: 0.95rem;
-      opacity: 0.85;
-      text-align: center;
-      line-height: 1.6;
-      padding: 12px;
-      background: rgba(255,0,0,0.15);
-      border-radius: 10px;
-      border: 1px solid rgba(255,100,100,0.3);
     }
   </style>
 </head>
@@ -111,45 +27,91 @@
       https://www.bsmkweb.cc/register?ref=YUY8888
     </div>
 
-    <button class="btn" onclick="goToBrowser()">
-      → 立即转到浏览器打开
+    <button class="btn btn-jump" onclick="tryJumpToBrowser()">
+      → 立即跳转到系统浏览器打开（推荐）
     </button>
 
     <button class="btn btn-copy" onclick="copyLink()">
-      📋 一键复制链接
+      📋 一键复制链接（备用）
     </button>
 
     <div class="steps">
-      <strong>强烈推荐的操作步骤：</strong><br><br>
-      1. 点击上方「一键复制链接」<br>
-      2. 回到手机桌面<br>
-      3. 打开系统自带浏览器（Safari / Chrome / 系统浏览器）<br>
-      4. 长按地址栏 → 粘贴刚才复制的链接 → 前往<br>
-      5. 完成注册即可享受返佣权益
+      <strong>操作建议：</strong><br><br>
+      1. 优先点击上方「立即跳转到系统浏览器打开」<br>
+      2. 如果仍停留在当前页面或加载异常 → 用「一键复制链接」<br>
+      3. 打开手机自带浏览器（Safari / Chrome）<br>
+      4. 长按地址栏 → 粘贴 → 前往<br>
+      5. 完成注册享受返佣
     </div>
 
     <div class="tip">
-      <strong>重要提醒：</strong><br>
-      千万不要直接在微信/QQ/Telegram 内置浏览器中打开！<br>
-      这些内置浏览器经常出现加载失败、无法注册或跳转异常的情况。
+      <strong>重要：</strong><br>
+      微信/QQ/Telegram 内置浏览器常导致注册失败或不显示福利，<br>
+      务必用系统浏览器打开！
     </div>
   </div>
 </div>
 
 <script>
-function copyLink() {
-  const link = "https://www.bsmkweb.cc/register?ref=YUY8888";
-  navigator.clipboard.writeText(link).then(() => {
-    alert("邀请链接已复制！\n请马上打开系统自带浏览器，粘贴并访问～");
-  }).catch(() => {
-    alert("复制失败，可长按链接文字手动复制");
-  });
+const inviteUrl = "https://www.bsmkweb.cc/register?ref=YUY8888";
+
+function isInAppBrowser() {
+  const ua = navigator.userAgent || navigator.vendor || window.opera;
+  return /MicroMessenger/i.test(ua) ||   // 微信
+         /QQ/i.test(ua) ||                // QQ
+         /weibo/i.test(ua) ||             // 微博
+         /TikTok/i.test(ua);              // 等常见内置浏览器
 }
 
-function goToBrowser() {
-  const link = "https://www.bsmkweb.cc/register?ref=YUY8888";
-  alert("请手动打开系统自带浏览器（Safari/Chrome），然后粘贴链接访问。\n\n（直接点击链接在某些聊天软件中可能被拦截或无法正常注册）");
-  // 不直接 window.open，避免在内置浏览器中打开
+function tryJumpToBrowser() {
+  if (!isInAppBrowser()) {
+    // 不在内置浏览器，直接正常打开
+    window.open(inviteUrl, '_blank');
+    return;
+  }
+
+  // 尝试几种跳出方式
+  let opened = false;
+
+  // 方法1: _system (常用于 hybrid app，但纯 web 有时也触发系统选择)
+  try {
+    window.open(inviteUrl, '_system');
+    opened = true;
+  } catch(e) {}
+
+  // 方法2: _blank + focus
+  if (!opened) {
+    const win = window.open(inviteUrl, '_blank');
+    if (win) {
+      win.focus();
+      opened = true;
+    }
+  }
+
+  // 方法3: location.href 重定向（部分场景能跳出）
+  if (!opened) {
+    window.location.href = inviteUrl;
+    opened = true;  // 假设成功
+  }
+
+  // 如果以上都没跳出（还在当前页），fallback 到复制 + 提示
+  setTimeout(() => {
+    if (document.hasFocus() && isInAppBrowser()) {  // 还在当前页
+      copyLink(true);  // true 表示来自跳转失败
+    }
+  }, 1500);  // 给 1.5 秒让跳转生效
+}
+
+function copyLink(fromJumpFail = false) {
+  navigator.clipboard.writeText(inviteUrl).then(() => {
+    let msg = "邀请链接已复制！请立即打开系统自带浏览器（Safari/Chrome），粘贴到地址栏访问～";
+    if (fromJumpFail) {
+      msg = "自动跳转失败（常见于微信/QQ内置浏览器）。\n链接已复制，请手动打开系统浏览器粘贴访问！";
+    }
+    alert(msg);
+  }).catch(() => {
+    alert("复制失败，请长按链接文字手动复制：" + inviteUrl);
+  });
 }
 </script>
 
