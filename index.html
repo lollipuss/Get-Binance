@@ -1,157 +1,441 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>币安注册 - 专属邀请链接</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: linear-gradient(135deg, #1e3c72, #2a5298);
-      color: white;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .container {
-      max-width: 420px;
-      width: 100%;
-      padding: 20px;
-      box-sizing: border-box;
-    }
-    h1 {
-      font-size: 2.1rem;
-      margin: 40px 0 12px;
-      text-align: center;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.4);
-    }
-    .subtitle {
-      font-size: 1.1rem;
-      opacity: 0.9;
-      text-align: center;
-      margin-bottom: 40px;
-    }
-    .card {
-      background: rgba(255,255,255,0.12);
-      backdrop-filter: blur(10px);
-      border-radius: 16px;
-      padding: 28px 24px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
-      border: 1px solid rgba(255,255,255,0.18);
-    }
-    .link-box {
-      background: rgba(0,0,0,0.3);
-      border-radius: 12px;
-      padding: 16px;
-      font-size: 1.05rem;
-      word-break: break-all;
-      margin: 20px 0 24px;
-      border: 1px dashed #60a5fa;
-    }
-    .btn {
-      display: block;
-      width: 100%;
-      background: #f0b90b;
-      color: #0b1421;
-      font-size: 1.18rem;
-      font-weight: bold;
-      text-align: center;
-      padding: 16px 0;
-      border-radius: 12px;
-      text-decoration: none;
-      margin: 16px 0;
-      box-shadow: 0 6px 20px rgba(240,185,11,0.4);
-      transition: all 0.2s;
-    }
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 28px rgba(240,185,11,0.55);
-    }
-    .btn-copy {
-      background: #3b82f6;
-      color: white;
-      box-shadow: 0 6px 20px rgba(59,130,246,0.4);
-    }
-    .steps {
-      margin-top: 32px;
-      font-size: 1.05rem;
-      line-height: 1.7;
-    }
-    .steps strong {
-      color: #fde047;
-    }
-    .tip {
-      margin-top: 36px;
-      font-size: 0.95rem;
-      opacity: 0.85;
-      text-align: center;
-      line-height: 1.6;
-      padding: 12px;
-      background: rgba(255,0,0,0.15);
-      border-radius: 10px;
-      border: 1px solid rgba(255,100,100,0.3);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>币安专属注册 · 高返佣现金红包</title>
+    <!-- Font Awesome 5 (币安风格常用图标) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #0b0e11;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            color: #eaecef;
+        }
+
+        /* 主卡片 — 模仿币安深色玻璃/磨砂质感 */
+        .binance-card {
+            max-width: 580px;
+            width: 100%;
+            background: #1e2329;
+            border-radius: 32px;
+            padding: 32px 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+            backdrop-filter: blur(2px);
+            border: 1px solid #2b2f36;
+        }
+
+        /* 币安风格头部 — 极简logo区域 */
+        .binance-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 28px;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .logo-icon {
+            background: #f0b90b;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: rotate(5deg);
+            box-shadow: 0 4px 10px rgba(240, 185, 11, 0.3);
+        }
+        .logo-icon span {
+            color: #0b0e11;
+            font-weight: 800;
+            font-size: 20px;
+            transform: rotate(-5deg);
+            letter-spacing: -0.5px;
+        }
+        .logo-text {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            background: linear-gradient(135deg, #f0b90b 0%, #f8d45a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .badge {
+            background-color: #2b2f36;
+            border-radius: 100px;
+            padding: 6px 14px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #f0b90b;
+            border: 1px solid #3a3f4a;
+            letter-spacing: 0.3px;
+        }
+
+        /* 主标题 */
+        .title-section {
+            margin-bottom: 24px;
+        }
+        .title-section h1 {
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .title-section h1 i {
+            color: #f0b90b;
+            font-size: 28px;
+        }
+        .sub-title {
+            color: #b7bdc6;
+            font-size: 15px;
+            border-left: 4px solid #f0b90b;
+            padding-left: 12px;
+            margin-top: 8px;
+        }
+
+        /* 福利卡片网格 (币安风格高信息密度) */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 28px 0 32px;
+        }
+        .benefit-item {
+            background: #2b2f36;
+            border-radius: 20px;
+            padding: 18px 8px 14px;
+            text-align: center;
+            border: 1px solid #3c414b;
+            transition: all 0.2s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.4);
+        }
+        .benefit-item i {
+            font-size: 28px;
+            color: #f0b90b;
+            margin-bottom: 10px;
+        }
+        .benefit-item h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: white;
+        }
+        .benefit-item p {
+            font-size: 13px;
+            color: #b7bdc6;
+            font-weight: 400;
+            line-height: 1.4;
+        }
+        .highlight {
+            color: #f0b90b;
+            font-weight: 700;
+        }
+
+        /* 主按钮 — 完全币安橙 */
+        .register-btn {
+            display: block;
+            width: 100%;
+            background: #f0b90b;
+            border: none;
+            border-radius: 40px;
+            padding: 18px 20px;
+            color: #0b0e11;
+            font-size: 20px;
+            font-weight: 700;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.2s;
+            box-shadow: 0 12px 24px -8px rgba(240, 185, 11, 0.3);
+            letter-spacing: 0.5px;
+            margin-bottom: 22px;
+            border: 1px solid rgba(255,215,80,0.5);
+        }
+        .register-btn i {
+            margin-left: 8px;
+            font-size: 18px;
+        }
+        .register-btn:hover {
+            background: #dca70a;
+            transform: scale(1.02);
+            box-shadow: 0 18px 30px -6px rgba(240, 185, 11, 0.5);
+        }
+        .register-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* 警告提示 & 复制框 */
+        .warning-tip {
+            background: rgba(240, 185, 11, 0.08);
+            border-left: 4px solid #f0b90b;
+            padding: 14px 16px;
+            border-radius: 16px;
+            font-size: 14px;
+            color: #eaecef;
+            margin: 24px 0 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            backdrop-filter: blur(4px);
+            border: 1px solid #3c3f4b;
+        }
+        .warning-tip i {
+            color: #f0b90b;
+            font-size: 22px;
+            margin-top: 2px;
+        }
+        .warning-tip span {
+            flex: 1;
+            line-height: 1.5;
+        }
+        .warning-tip strong {
+            color: #f0b90b;
+            font-weight: 600;
+        }
+
+        /* 链接复制区域 (仿币安内部卡片) */
+        .link-box {
+            display: flex;
+            align-items: center;
+            background: #0b0e11;
+            border: 1px solid #3c414b;
+            border-radius: 60px;
+            padding: 4px 4px 4px 20px;
+            margin-top: 8px;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
+        }
+        .link-box input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: #f0b90b;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            padding: 12px 0;
+            outline: none;
+            width: 100%;
+            white-space: nowrap;
+            overflow-x: auto;
+        }
+        .link-box input::selection {
+            background: #f0b90b;
+            color: #0b0e11;
+        }
+        .copy-btn {
+            background: #2b2f36;
+            border: 1px solid #4a4f5a;
+            color: #f0b90b;
+            border-radius: 60px;
+            padding: 10px 24px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+        .copy-btn i {
+            font-size: 16px;
+        }
+        .copy-btn:hover {
+            background: #3a3f4a;
+            color: #fcd34d;
+            border-color: #f0b90b;
+        }
+        .copy-btn:active {
+            transform: scale(0.96);
+        }
+
+        /* 邀请码高亮 & 小字 */
+        .ref-highlight {
+            display: inline-block;
+            background: #2b2f36;
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-size: 15px;
+            font-weight: 600;
+            border: 1px solid #4a4f5a;
+            color: #f0b90b;
+            margin-top: 20px;
+        }
+        .footnote {
+            font-size: 12px;
+            color: #5e6673;
+            text-align: center;
+            margin-top: 24px;
+            border-top: 1px dashed #2b2f36;
+            padding-top: 20px;
+        }
+        .footnote a {
+            color: #848e9c;
+            text-decoration: none;
+            border-bottom: 1px dotted #f0b90b;
+        }
+
+        /* 响应式优化 */
+        @media (max-width: 480px) {
+            .binance-card { padding: 24px 16px; }
+            .benefits-grid { grid-template-columns: 1fr; gap: 10px; }
+            .benefit-item { display: flex; align-items: center; text-align: left; padding: 12px 18px; gap: 16px; }
+            .benefit-item i { margin-bottom: 0; font-size: 26px; width: 36px; }
+            .benefit-item h3 { margin-bottom: 2px; font-size: 17px; }
+            .title-section h1 { font-size: 24px; }
+            .link-box { flex-wrap: wrap; border-radius: 40px; padding: 8px 12px; }
+            .link-box input { width: 100%; padding: 8px 0; font-size: 13px; }
+            .copy-btn { width: 100%; justify-content: center; margin-top: 6px; }
+        }
+
+        /* 模拟币安小细节：网格背景 (可选) */
+        .binance-card {
+            background-image: radial-gradient(circle at 20% 30%, rgba(240, 185, 11, 0.02) 0%, transparent 30%);
+        }
+        /* 输入框滚动条隐藏 (chrome) */
+        .link-box input::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
 </head>
 <body>
+    <div class="binance-card">
+        <!-- 头部（仿币安极简） -->
+        <div class="binance-header">
+            <div class="logo-area">
+                <div class="logo-icon"><span>B</span></div>
+                <span class="logo-text">Binance</span>
+            </div>
+            <div class="badge"><i class="fas fa-star" style="color:#f0b90b; font-size:10px;"></i> 特邀专享</div>
+        </div>
 
-<div class="container">
-  <h1>币安专属注册通道</h1>
-  <div class="subtitle">使用此链接注册可获得最高返佣 + 福利</div>
+        <!-- 主标题 -->
+        <div class="title-section">
+            <h1>
+                <i class="fas fa-bolt"></i> 高返佣·现金红包
+            </h1>
+            <div class="sub-title">
+                通过专属链接注册，永久享受顶级返佣 + 额外USDT奖励
+            </div>
+        </div>
 
-  <div class="card">
-    <div style="text-align:center; margin-bottom:16px; font-size:1.1rem;">
-      我的币安邀请链接：
+        <!-- 福利网格 (核心: 高返佣, 现金红包等) -->
+        <div class="benefits-grid">
+            <div class="benefit-item">
+                <i class="fas fa-percent"></i>
+                <h3>高返佣</h3>
+                <p><span class="highlight">40% 手续费返佣</span><br>终身有效，合约现货共享</p>
+            </div>
+            <div class="benefit-item">
+                <i class="fas fa-money-bill-wave"></i>
+                <h3>现金红包</h3>
+                <p><span class="highlight">20 USDT</span> 注册奖励<br>交易即解锁，立即到账</p>
+            </div>
+            <div class="benefit-item">
+                <i class="fas fa-gift"></i>
+                <h3>专属礼包</h3>
+                <p><span class="highlight">188 USDT 体验金</span><br>新合约用户额外福利</p>
+            </div>
+        </div>
+
+        <!-- 开始注册按钮 (替换为专属邀请链接) -->
+        <a href="https://www.bsmkweb.cc/register?ref=YUY8888" target="_blank" rel="noopener noreferrer" class="register-btn">
+            开始注册 <i class="fas fa-arrow-right"></i>
+        </a>
+
+        <!-- 重要提示：若打开失败，复制到浏览器粘贴 -->
+        <div class="warning-tip">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span>
+                <strong>⚠️ 若点击按钮无法打开</strong> (如微信/QQ内限制)，请复制下方链接，到手机<strong>自带浏览器</strong>粘贴打开注册，即可锁定高返佣+红包。
+            </span>
+        </div>
+
+        <!-- 可复制的专属链接框 (与按钮相同链接) -->
+        <div class="link-box">
+            <input type="text" id="inviteLink" value="https://www.bsmkweb.cc/register?ref=YUY8888" readonly>
+            <button class="copy-btn" id="copyBtn"><i class="far fa-copy"></i> 复制链接</button>
+        </div>
+
+        <!-- 额外高亮邀请码 -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 16px; flex-wrap: wrap; gap: 10px;">
+            <span class="ref-highlight"><i class="fas fa-tag"></i> 邀请码：YUY8888</span>
+            <span style="color:#b7bdc6; font-size:13px;"><i class="fas fa-shield-alt" style="color:#f0b90b;"></i> 永久绑定返佣</span>
+        </div>
+
+        <!-- 底部说明 (保持透明) -->
+        <div class="footnote">
+            ⚡ 福利仅限通过本链接注册的新用户 · 现金红包活动最终解释权归邀请方所有<br>
+            <a href="#" style="cursor: default;">安全提醒：请务必通过上方链接注册，勿信他人</a>
+        </div>
     </div>
-    
-    <div class="link-box" id="inviteLink">
-      https://www.bsmkweb.cc/register?ref=YUY8888
-    </div>
 
-    <button class="btn" onclick="goToBrowser()">
-      → 立即转到浏览器打开
-    </button>
+    <!-- 复制交互 (轻提示采用 alert，符合要求且兼容) -->
+    <script>
+        (function() {
+            const copyBtn = document.getElementById('copyBtn');
+            const linkInput = document.getElementById('inviteLink');
 
-    <button class="btn btn-copy" onclick="copyLink()">
-      📋 一键复制链接
-    </button>
+            function copyToClipboard(text) {
+                // 优先使用现代clipboard API
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(text).then(() => {
+                        alert('✅ 复制成功！请粘贴到手机自带浏览器地址栏打开。');
+                    }).catch(() => {
+                        fallbackCopy(text);
+                    });
+                } else {
+                    fallbackCopy(text);
+                }
+            }
 
-    <div class="steps">
-      <strong>强烈推荐的操作步骤：</strong><br><br>
-      1. 点击上方「一键复制链接」<br>
-      2. 回到手机桌面<br>
-      3. 打开系统自带浏览器（Safari / Chrome / 系统浏览器）<br>
-      4. 长按地址栏 → 粘贴刚才复制的链接 → 前往<br>
-      5. 完成注册即可享受返佣权益
-    </div>
+            function fallbackCopy(text) {
+                // 备选方案 (针对旧浏览器)
+                linkInput.select();
+                linkInput.setSelectionRange(0, 99999); // 对于移动端
+                try {
+                    document.execCommand('copy');
+                    alert('✅ 复制成功！请粘贴到自带浏览器打开。');
+                } catch (err) {
+                    alert('❌ 复制失败，请手动长按链接选择复制');
+                }
+                // 取消选中 (可选)
+                linkInput.blur();
+            }
 
-    <div class="tip">
-      <strong>重要提醒：</strong><br>
-      千万不要直接在微信/QQ/Telegram 内置浏览器中打开！<br>
-      这些内置浏览器经常出现加载失败、无法注册或跳转异常的情况。
-    </div>
-  </div>
-</div>
+            copyBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const link = linkInput.value;
+                copyToClipboard(link);
+            });
 
-<script>
-function copyLink() {
-  const link = "https://www.bsmkweb.cc/register?ref=YUY8888";
-  navigator.clipboard.writeText(link).then(() => {
-    alert("邀请链接已复制！\n请马上打开系统自带浏览器，粘贴并访问～");
-  }).catch(() => {
-    alert("复制失败，可长按链接文字手动复制");
-  });
-}
+            // 增加用户体验：点击输入框自动全选（方便手动复制）
+            linkInput.addEventListener('click', function() {
+                this.select();
+            });
 
-function goToBrowser() {
-  const link = "https://www.bsmkweb.cc/register?ref=YUY8888";
-  alert("请手动打开系统自带浏览器（Safari/Chrome），然后粘贴链接访问。\n\n（直接点击链接在某些聊天软件中可能被拦截或无法正常注册）");
-  // 不直接 window.open，避免在内置浏览器中打开
-}
-</script>
+            // 可选：阻止按钮默认提交任何形式
+            copyBtn.addEventListener('mousedown', (e) => e.preventDefault());
+        })();
+    </script>
 
+    <!-- 注：所有样式和交互均符合币安深色风格，按钮链接已替换为专属邀请链接 -->
 </body>
 </html>
