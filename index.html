@@ -5,99 +5,147 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>币安注册 - 专属邀请链接</title>
   <style>
-    /* 保留你原来的全部 style，这里只展示新增/修改部分 */
+    /* 你原来的 style 全部保留，这里只加/改部分 */
     .btn-jump {
-      background: #4caf50;  /* 绿色，更吸引点击 */
+      background: #4caf50;  /* 绿色，代表“去外部” */
       color: white;
     }
     .btn-jump:hover {
-      background: #43a047;
+      background: #388e3c;
+    }
+    #qrcode {
+      text-align: center;
+      margin: 30px 0 10px;
+      background: white;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    #qrcode img {
+      max-width: 180px;
     }
   </style>
+  <!-- 加 qrcode.js 库（CDN，免费） -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
 
-<!-- HTML 结构保持不变，只改按钮类名和 onclick -->
+<div class="container">
+  <h1>币安专属注册通道</h1>
+  <div class="subtitle">使用此链接注册可获得最高返佣 + 福利</div>
 
-<button class="btn btn-jump" onclick="attemptJump()">
-  → 立即跳转到系统浏览器（推荐）
-</button>
+  <div class="card">
+    <div style="text-align:center; margin-bottom:16px; font-size:1.1rem;">
+      我的币安邀请链接：
+    </div>
+    
+    <div class="link-box" id="inviteLink">
+      https://www.bsmkweb.cc/register?ref=YUY8888
+    </div>
 
-<button class="btn btn-copy" onclick="copyLink()">
-  📋 一键复制链接（备用方式）
-</button>
+    <button class="btn btn-jump" onclick="tryJumpOrGuide()">
+      → 立即跳转到系统浏览器（推荐）
+    </button>
 
-<!-- steps 和 tip 稍作调整 -->
-<div class="steps">
-  <strong>推荐操作流程：</strong><br><br>
-  1. 点击「立即跳转到系统浏览器」 — 大部分手机可自动成功<br>
-  2. 如果页面没变化或仍卡在微信 → 点击「一键复制链接」<br>
-  3. 回到手机桌面，打开 Safari / Chrome 等自带浏览器<br>
-  4. 长按地址栏粘贴链接 → 前往注册<br>
-  5. 注册成功后可享受返佣权益
+    <button class="btn btn-copy" onclick="copyLink()">
+      📋 一键复制链接（备用）
+    </button>
+
+    <div class="steps">
+      <strong>推荐操作流程：</strong><br><br>
+      1. 点击上方「立即跳转到系统浏览器」 — 部分手机可自动成功<br>
+      2. 如果没反应或仍显示微信界面 → 点击「一键复制链接」或扫下方二维码<br>
+      3. 打开系统浏览器（Safari / Chrome）<br>
+      4. 粘贴链接 或 直接扫二维码 → 前往注册<br>
+      5. 完成注册享受返佣权益
+    </div>
+
+    <!-- 二维码区域 -->
+    <div id="qrcode">
+      <p style="margin:0 0 10px; color:#000; font-weight:bold;">或直接扫码打开（推荐）</p>
+      <div id="qrcode-container"></div>
+    </div>
+
+    <div class="tip">
+      <strong>重要提醒：</strong><br>
+      微信/QQ 内置浏览器常导致加载失败、注册不了或福利不显示。<br>
+      <strong>务必用系统浏览器打开！</strong> 扫码或复制粘贴最稳。
+    </div>
+  </div>
 </div>
 
 <script>
 const INVITE_URL = "https://www.bsmkweb.cc/register?ref=YUY8888";
 
-function isLikelyWeChat() {
-  const ua = navigator.userAgent.toLowerCase();
-  return ua.includes('micromessenger') || ua.includes('wechat');
+function isWeChat() {
+  return /MicroMessenger/i.test(navigator.userAgent);
 }
 
-function attemptJump() {
-  if (!isLikelyWeChat()) {
-    // 不在微信，直接正常打开
+function tryJumpOrGuide() {
+  if (!isWeChat()) {
     window.open(INVITE_URL, '_blank');
     return;
   }
 
-  // 微信内尝试跳出（顺序从最可能到次之）
-  const attempts = [
-    () => window.open(INVITE_URL, '_system'),
-    () => window.open(INVITE_URL, '_blank'),
-    () => { window.location.href = INVITE_URL; }
-  ];
+  // 微信内尝试（基本都会失败，但试试无妨）
+  try {
+    window.open(INVITE_URL, '_system'); 
+  } catch(e) {}
+  try {
+    window.open(INVITE_URL, '_blank');
+  } catch(e) {}
+  try {
+    window.location.href = INVITE_URL;
+  } catch(e) {}
 
-  attempts.forEach(fn => {
-    try { fn(); } catch(e) {}
-  });
-
-  // 1.5 秒后检查是否还在当前页（微信内通常不会马上离开）
+  // 1.8 秒后判断是否还在微信（还在当前页）
   setTimeout(() => {
-    if (document.hasFocus() && isLikelyWeChat()) {
-      // 还在微信 → 自动复制 + 友好提示
+    if (document.hasFocus() && isWeChat()) {
+      // 失败 → 自动复制 + 弹窗
       navigator.clipboard.writeText(INVITE_URL).then(() => {
         alert(
-          "自动跳转失败（微信内置浏览器限制）\n\n" +
+          "微信限制，无法自动跳出内置浏览器。\n\n" +
           "链接已自动复制到剪贴板！\n\n" +
-          "请现在：\n" +
-          "1. 返回手机桌面\n" +
-          "2. 打开 Safari / Chrome / 系统浏览器\n" +
+          "请现在操作：\n" +
+          "1. 返回桌面\n" +
+          "2. 打开 Safari / Chrome 等系统浏览器\n" +
           "3. 长按地址栏 → 粘贴 → 前往\n\n" +
-          "这样就能正常注册并获得返佣啦～"
+          "或直接扫下方二维码（最简单）"
         );
       }).catch(() => {
         alert(
-          "自动跳转失败，且复制也失败。\n\n" +
-          "请长按下方链接手动复制：\n" + INVITE_URL
+          "自动跳转失败，且复制失败。\n\n" +
+          "请手动长按下方链接复制：\n" + INVITE_URL + "\n\n" +
+          "然后去系统浏览器粘贴打开。"
         );
       });
     }
-  }, 1500);
+  }, 1800);
 }
 
 function copyLink() {
   navigator.clipboard.writeText(INVITE_URL).then(() => {
     alert(
       "链接已复制！\n\n" +
-      "请打开系统浏览器（Safari/Chrome），粘贴到地址栏访问。\n" +
-      "避免在微信内打开，以确保注册顺利。"
+      "请打开系统浏览器（Safari/Chrome），粘贴地址栏访问。\n" +
+      "微信内打开大概率失败。"
     );
   }).catch(() => {
     alert("复制失败，请长按链接手动复制：" + INVITE_URL);
   });
 }
+
+// 生成二维码（页面加载后自动创建）
+window.onload = function() {
+  new QRCode(document.getElementById("qrcode-container"), {
+    text: INVITE_URL,
+    width: 180,
+    height: 180,
+    colorDark: "#000000",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.H  // 高纠错，扫码更稳
+  });
+};
 </script>
 
 </body>
